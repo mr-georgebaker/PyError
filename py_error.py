@@ -20,13 +20,6 @@ class App(tk.Tk):
 
         self.vars = {}
 
-        self.title('Fehlerrechnung')
-        self.menu = tk.Menu(self)
-        self.config(menu=self.menu)
-        self.helpmenu = tk.Menu(self.menu)
-        self.menu.add_cascade(label='Help', menu=self.helpmenu)
-        self.helpmenu.add_command(label='Usage', command=self.instruction)
-
         self.formula = tk.Entry(self.frame, width=80)
         self.formula.pack(side='left', fill='x')
 
