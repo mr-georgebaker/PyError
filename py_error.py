@@ -44,15 +44,6 @@ class App(tk.Tk):
         formula_2 = sp.sympify(formula_raw)
         variables = formula_1.variables()
         self.update_UI(variables)
-        self.differentiate(formula_2, variables)
-
-    def differentiate(self, formula, variables):
-        """ Differentiates the formula with respect to all variables """
-        diff = []
-        for element in variables:
-            sym = sp.sympify(element)
-            differ = sp.diff(formula, sym)
-            diff.append(differ)
 
     def update_UI(self, variables):
         self.init_UI()
