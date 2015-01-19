@@ -23,4 +23,4 @@ To-Do
 ======
 
 Bugfixing <br>
-Stand-Alone-Windows-Version
+Stand-alone-versions for Linux (Debian-based) and Windows
