@@ -46,7 +46,6 @@ class App(tk.Tk):
         self.update_UI(variables)
 
     def update_UI(self, variables):
-        self.init_UI()
         for i in range(len(variables)):
             self.vars[i] = tk.StringVar()
             self.entry = ttk.Entry(self.bottomframe, textvariable=self.vars[i])
