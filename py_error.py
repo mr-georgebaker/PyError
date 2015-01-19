@@ -46,6 +46,7 @@ class App(tk.Tk):
         self.update_UI(variables)
 
     def update_UI(self, variables):
+        """ Updates the UI to enter the values and uncertainties """
         for i in range(len(variables)):
             self.vars[i] = tk.StringVar()
             self.entry = ttk.Entry(self.bottomframe, textvariable=self.vars[i])
