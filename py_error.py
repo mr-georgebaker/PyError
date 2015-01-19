@@ -15,7 +15,6 @@ class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
 
-    def init_UI(self):
         self.frame = tk.Frame(self)
         self.frame.pack()
         self.bottomframe = tk.Frame(self)
