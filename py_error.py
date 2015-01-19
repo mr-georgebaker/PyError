@@ -3,8 +3,6 @@ try:
 except ImportError:
     import Tkinter as tk
 import ttk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
-import matplotlib.pyplot as plt
 import sympy as sp
 from sympy.abc import *
 from py_expression_eval import Parser
