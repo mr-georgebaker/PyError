@@ -22,11 +22,12 @@ Needed Python Libraries
 To-Do
 ======
 
-<u>Bugfixing:</u><br>
+Bugfixing:<br><br>
 Problems with constants like PI <br>
-Problem with lambda as a variable (because of eval in sympify) <br><br>
+Problem with lambda as a variable (because of eval in sympify) <br>
+Resolve py-expression-eval dependency<br><br>
 
-
-
-
+Improvements:<br><br>
+Add Gaussian correlation error propagation <br>
 Stand-alone-versions for Linux (Debian-based) and Windows
+
