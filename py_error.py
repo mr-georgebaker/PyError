@@ -26,20 +26,26 @@ class App(tk.Tk):
                                           command=self.calculate_value)
         self.calculate_button.grid(row=0, column=2)
 
-        self.entry_val = []
-        self.entry_unc = []
-        self.label = []
-
     def analyze_formula(self):
         """ Parses the formula using sympy and py_expression_eval """
         formula_raw = self.formula.get()
-        formula_1 = parser.parse(formula_raw)
+        self.formula_1 = parser.parse(formula_raw)
         self.formula_2 = sp.sympify(formula_raw)
-        self.variables = formula_1.variables()
+        self.variables = self.formula_1.variables()
         self.update_UI(self.variables)
 
     def update_UI(self, variables):
         """ Adds to the UI entry-fields for values and uncertainties"""
+        try:
+            for i in range(len(self.entry_val)):
+                self.entry_val[i].destroy()
+                self.entry_unc[i].destroy()
+                self.label[i].destroy()
+        except AttributeError:
+            pass
+        self.entry_val = []
+        self.entry_unc = []
+        self.label = []
         for i in range(len(variables)):
             self.entry_val.append(ttk.Entry(self))
             self.entry_val[i].grid(row=i+2, column=1)
@@ -58,7 +64,7 @@ class App(tk.Tk):
         self.differentiate(self.formula_2, self.variables)
         for i in range(len(self.variables)):
             self.dic_value.update({self.variables[i]:self.entry_val[i].get()})
-        self.solution = self.formula_2.evalf(subs=self.dic_value)
+        self.solution = self.formula_2.evalf(5, subs=self.dic_value)
         self.calculate_error()
         self.present_solution()
 
@@ -70,7 +76,7 @@ class App(tk.Tk):
             value_diff *= float(self.entry_unc[i].get())
             value_diff = value_diff**2
             self.error += value_diff
-        self.error = sp.sqrt(self.error)
+        self.error = sp.N(sp.sqrt(self.error), 2)
         
     def differentiate(self, formula, variables):
         """ Differentiates the formula with respect to all variables """
@@ -82,12 +88,11 @@ class App(tk.Tk):
             
     def present_solution(self):
         """ Presents the solution in a canvas """
-        solution_final = str(round(self.solution, 5)) + " +/- " + str(round(self.error, 5))
+        solution_final = str(self.solution) + " +/- " + str(self.error)
         self.canvas = tk.Canvas(self, width=200, height=50)
         self.canvas.grid(row=100, column=1)
         canvas_id = self.canvas.create_text(10,10, anchor='nw')
         self.canvas.itemconfig(canvas_id, text=solution_final)
-        self.canvas.insert(canvas_id, 12, 'new')
 
 def main():
     app = App()
