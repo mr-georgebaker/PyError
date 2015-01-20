@@ -22,5 +22,11 @@ Needed Python Libraries
 To-Do
 ======
 
-Bugfixing (problems with constants like pi) <br>
+<u>Bugfixing:</u><br>
+Problems with constants like PI <br>
+Problem with lambda as a variable (because of eval in sympify) <br><br>
+
+
+
+
 Stand-alone-versions for Linux (Debian-based) and Windows
