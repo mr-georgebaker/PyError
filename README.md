@@ -22,5 +22,5 @@ Needed Python Libraries
 To-Do
 ======
 
-Bugfixing <br>
+Bugfixing (problems with constants like pi) <br>
 Stand-alone-versions for Linux (Debian-based) and Windows
