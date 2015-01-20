@@ -1,5 +1,5 @@
-PY_ERROR
-========
+PY_ERROR 0.0.1
+==============
 
 Author: mr-georgebaker<br>
 Email: georgebaker1@hotmail.com
@@ -28,6 +28,7 @@ Problem with lambda as a variable (because of eval in sympify) <br>
 Resolve py-expression-eval dependency<br><br>
 
 Improvements:<br><br>
+Add formula preview<br>
 Add Gaussian correlation error propagation <br>
 Stand-alone-versions for Linux (Debian-based) and Windows
 
