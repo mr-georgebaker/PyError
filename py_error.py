@@ -7,10 +7,9 @@ import sympy as sp
 from sympy.abc import *
 from py_expression_eval import Parser
 
-from constants import REPLACE_DIC
+from constants import REPLACE_DIC, OPTIONS
 
 parser = Parser()
-sp.init_printing()
 
 class App(tk.Tk):
     def __init__(self):
@@ -33,12 +32,14 @@ class App(tk.Tk):
         """ Parses the formula using sympy and py_expression_eval """
         try:
             formula_raw = self.formula.get()
+            formula_raw_2 = self.formula.get().replace('pi', 'PI')
             self.formula_1 = parser.parse(formula_raw)
             self.formula_2 = sp.sympify(formula_raw)
             self.variables = self.formula_1.variables()
             self.update_UI(self.variables)
-        except Exception:
-            self.formula.insert(0, "Please use a different formula")
+        except AttributeError:
+            self.formula.insert(0, "Something went wrong")
+        
 
     def update_UI(self, variables):
         """ Adds to the UI entry-fields for values and uncertainties"""
@@ -52,19 +53,43 @@ class App(tk.Tk):
         self.entry_val = []
         self.entry_unc = []
         self.label = []
+        self.checkbox = []
+        self.checkbox_value = []
+        self.checkbox_trace = []
         self.nice_greek = [REPLACE_DIC.get(item,item) for item in self.variables]
         for i in range(len(variables)):
             self.entry_val.append(ttk.Entry(self))
-            self.entry_val[i].grid(row=i+2, column=1)
+            self.entry_val[i].grid(row=i+3, column=1)
             self.entry_unc.append(ttk.Entry(self))
-            self.entry_unc[i].grid(row=i+2, column=2)
+            self.entry_unc[i].grid(row=i+3, column=2)
             self.label.append(tk.Label(self, text=self.nice_greek[i]))
-            self.label[i].grid(row=i+2, column=0)
+            self.label[i].grid(row=i+3, column=0)
             self.label_val = tk.Label(self, text='Value')
-            self.label_val.grid(row=1, column=1)
+            self.label_val.grid(row=2, column=1)
             self.label_unc = tk.Label(self, text='Uncertainty')
-            self.label_unc.grid(row=1, column=2)
+            self.label_unc.grid(row=2, column=2)
+            self.checkbox_value.append(tk.StringVar(self))
+            self.checkbox.append(tk.OptionMenu(self, self.checkbox_value[i],
+                                               *OPTIONS.keys()))
+            self.checkbox[i].grid(row=i+3, column=3)
+            self.checkbox_trace.append(self.checkbox_value[i].trace('w',
+                                                                    self.insert_constants))
 
+    def insert_constants(self, *args):
+        for i in range(len(self.checkbox_value)):
+            try:
+                if self.entry_val[i].get():
+                    pass
+                else:
+                    self.entry_val[i].insert(0, '')
+                    self.entry_unc[i].insert(0, '')
+                    value_unc = OPTIONS[self.checkbox_value[i].get()]
+                    self.entry_val[i].insert(0, value_unc[0])
+                    self.entry_unc[i].insert(0, value_unc[1])
+            except KeyError:
+                pass
+                                    
+            
     def calculate_value(self):
         """ Calculates the solution """
         self.dic_value = {}
