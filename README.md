@@ -10,7 +10,7 @@ Parses an entered formula and calculates the value as well as the uncertainty ac
 Install
 =======
 1) Install needed python libraries (see below)<br>
-2) git clone https://github.com/mr-georgebaker/py_error <br>
+2) git clone https://github.com/mr-georgebaker/PyError <br>
 3) change to the new directory <br>
 4) chmod +x py_error.py
 
