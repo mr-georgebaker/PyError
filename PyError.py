@@ -18,7 +18,7 @@ class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
 
-        self.title('Fehlerrechnung')
+        self.title('PyError')
 
         self.formula = ttk.Entry(self)
         self.formula.grid(row=0, column=0)
