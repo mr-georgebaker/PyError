@@ -1,4 +1,4 @@
-PY_ERROR 0.0.2
+PyError 0.0.3
 ==============
 
 Author: mr-georgebaker<br>
