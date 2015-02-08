@@ -32,7 +32,7 @@ class App(tk.Tk):
         self.calculate_button.grid(row=0, column=2)
 
         self.formula_checkbox_var = tk.IntVar()
-        self.formula_checkbox = tk.Checkbutton(self, text='Formula Preview? (Internet connection requiered)',
+        self.formula_checkbox = tk.Checkbutton(self, text='Formula Preview? (Internet connection required)',
                                                variable=self.formula_checkbox_var)
         self.formula_checkbox.grid(row=0, column=4)
 
