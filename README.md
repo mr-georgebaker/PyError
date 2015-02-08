@@ -1,4 +1,4 @@
-PyError 0.0.3
+![icon](http://georgebaker.lima-city.de/lib/exe/fetch.php?media=icon.ico)PyError 0.0.3
 ==============
 
 Author: mr-georgebaker<br>
