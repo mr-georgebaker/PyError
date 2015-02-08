@@ -3,9 +3,12 @@ try:
 except ImportError:
     import Tkinter as tk
 import ttk
+from PIL import Image, ImageTk
 import sympy as sp
 from sympy.abc import *
 from py_expression_eval import Parser
+import os
+import requests
 
 from constants import REPLACE_DIC, OPTIONS
 
@@ -28,14 +31,21 @@ class App(tk.Tk):
                                           command=self.calculate_value)
         self.calculate_button.grid(row=0, column=2)
 
+        self.formula_checkbox_var = tk.IntVar()
+        self.formula_checkbox = tk.Checkbutton(self, text='Formula Preview? (Internet connection requiered)',
+                                               variable=self.formula_checkbox_var)
+        self.formula_checkbox.grid(row=0, column=4)
+
     def analyze_formula(self):
         """ Parses the formula using sympy and py_expression_eval """
         try:
             formula_raw = self.formula.get()
             formula_raw_2 = self.formula.get().replace('pi', 'PI')
-            self.formula_1 = parser.parse(formula_raw)
+            self.formula_1 = parser.parse(formula_raw_2)
             self.formula_2 = sp.sympify(formula_raw)
             self.variables = self.formula_1.variables()
+            self.latex_formula = sp.latex(self.formula_2)
+            self.latex_image(self.latex_formula, 'formula.png')
             self.update_UI(self.variables)
         except AttributeError:
             self.formula.insert(0, "Something went wrong")
@@ -74,8 +84,13 @@ class App(tk.Tk):
             self.checkbox[i].grid(row=i+3, column=3)
             self.checkbox_trace.append(self.checkbox_value[i].trace('w',
                                                                     self.insert_constants))
+        if self.formula_checkbox_var.get():
+            self.formula_image = ImageTk.PhotoImage(Image.open('formula.png'))
+            self.formula_label = tk.Label(self, image=self.formula_image)
+            self.formula_label.grid(row=1, column=4)
 
     def insert_constants(self, *args):
+        """ Inserts the choosen constants in the entry fields """
         for i in range(len(self.checkbox_value)):
             try:
                 if self.entry_val[i].get():
@@ -88,6 +103,18 @@ class App(tk.Tk):
                     self.entry_unc[i].insert(0, value_unc[1])
             except KeyError:
                 pass
+
+    def latex_image(self, formula, file, negate=False):
+        """ Creates a .png Image for the given formula """
+        tfile = file
+        if negate:
+            tfile = 'tmp.png'
+        r = requests.get('http://latex.codecogs.com/png.latex?\dpi{110} \huge %s' % formula)
+        f = open(tfile, 'wb')
+        f.write(r.content)
+        f.close()
+        if negate:
+            os.system('convert tmp.png -channel RGB -negate -colorspace rgb %s' %file)
                                     
             
     def calculate_value(self):
