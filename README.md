@@ -17,8 +17,8 @@ Needed Python Libraries
 =======================
 
 [Sympy] (http://www.sympy.org/en/index.html) <br>
-[py-expression-eval] (https://github.com/AxiaCore/py-expression-eval)
-[PIL](https://pypi.python.org/pypi/Pillow/2.2.1)
+[py-expression-eval] (https://github.com/AxiaCore/py-expression-eval) <br>
+[PIL](https://pypi.python.org/pypi/Pillow/2.2.1) <br>
 [Requests](https://pypi.python.org/pypi/Pillow/2.2.1)
 
 To-Do
