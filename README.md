@@ -18,17 +18,18 @@ Needed Python Libraries
 
 [Sympy] (http://www.sympy.org/en/index.html) <br>
 [py-expression-eval] (https://github.com/AxiaCore/py-expression-eval)
+[PIL](https://pypi.python.org/pypi/Pillow/2.2.1)
+[Requests](https://pypi.python.org/pypi/Pillow/2.2.1)
 
 To-Do
 ======
 
 Bugfixing:<br><br>
-Problems with constants like PI <br>
 Problem with lambda as a variable (because of eval in sympify) <br>
 Resolve py-expression-eval dependency<br><br>
 
 Improvements:<br><br>
-Add formula preview<br>
+
 Add Gaussian correlation error propagation <br>
-Stand-alone-versions for Linux (Debian-based) and Windows
+
 
