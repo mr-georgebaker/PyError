@@ -12,7 +12,7 @@ Install
 1) Install needed python libraries (see below)<br>
 2) git clone https://github.com/mr-georgebaker/PyError <br>
 3) change to the new directory <br>
-4) chmod +x py_error.py
+4) chmod +x PyError.py
 
 Needed Python Libraries
 =======================
